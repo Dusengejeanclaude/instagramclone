@@ -1,0 +1,21 @@
+<%= link_to 'New Post', new_post_path, class:"btn btn-secondary btn-lg active" %>
+  <% @posts.each do |post| %>
+  <center>
+<div class="card" style="width: 40rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= post.user.fullname %>s'Post</h5>
+    <h5 class="card-title"><%= image_tag post.image.url, class:"upload" %></h5>
+    <p class="card-text"><%= post.content %></p>
+    <% if logged_in? %>
+    <% if current_user.id == post.user_id%>
+      <%= link_to 'Show', post, class:"btn btn-success" %>
+      <%= link_to 'Edit', edit_post_path(post), class:"btn btn-primary" %>
+      <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+    <% else %>
+    <%= link_to 'Set A Favorite', post, class:"btn btn-info" %>
+    <% end %>
+    <% end %>
+  </div>
+</div>
+</center>
+<% end %>

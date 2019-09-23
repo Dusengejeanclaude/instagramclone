@@ -1,0 +1,7 @@
+<div style="margin-left:250px;">
+  <%= image_tag @profile.image.url, class:"brand_logo" %>
+  <%= @profile.user.fullname %>
+<%= link_to 'Confirm', profiles_path, class:"btn btn-warning" %>
+<%= link_to 'Edit', edit_profile_path(@profile), class:"btn" %>
+</div>
+

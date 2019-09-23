@@ -1,0 +1,26 @@
+<div class="card text-center" style="width:900px;border-radius:30px;margin-left:150px;">
+  <div class="card-header">
+    <strong><%= @post.user.fullname %>s'Post</strong>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><%= image_tag @post.image.url, class:"upload" %></h5>
+    <strong>Content</strong><p class="card-text"><%= @post.content %></p>
+    <strong>User:</strong><p class="card-text"><%= @post.user.fullname %></p>
+    <% if logged_in? %>
+    <% if current_user.id == @post.user_id%>
+    <%= link_to 'Comfirm Post', posts_path, data: { confirm: 'Are you sure do you want to Comfirm?' }, class:"btn btn-primary" %>
+    <%= link_to 'Back', edit_post_path(@post), class:"btn" %>
+    <% else %>
+    <% unless @post.user_id == current_user.id %>
+        <% if @favorite.present? %>
+        <%= link_to 'Cancel Like', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
+        <%= link_to 'Back', posts_path, class:"btn" %>
+      <% else %>
+        <%= link_to 'Like A Post', favorites_path(post_id: @post.id), method: :post, class: 'btn btn-primary' %>
+        <%= link_to 'Back', posts_path, class:"btn" %>
+    <% end %>
+    <% end %>
+    <% end %>
+    <% end %>
+  </div>
+</div><br>
